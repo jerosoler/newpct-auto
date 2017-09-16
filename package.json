@@ -1,0 +1,29 @@
+{
+  "name": "newpct_auto",
+  "version": "1.0.0",
+  "description": "Automatiza descargas de NewPCT",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jerosoler/newpct-auto.git"
+  },
+  "keywords": [
+    "newpct",
+    "auto"
+  ],
+  "author": "Jero Soler",
+  "license": "ISC",
+  "dependencies": {
+    "cheerio": "^1.0.0-rc.2",
+    "feedme": "^1.0.1",
+    "node-crontab": "0.0.8",
+    "request": "^2.81.0"
+  },
+  "bugs": {
+    "url": "https://github.com/jerosoler/newpct-auto/issues"
+  },
+  "homepage": "https://github.com/jerosoler/newpct-auto#readme"
+}
