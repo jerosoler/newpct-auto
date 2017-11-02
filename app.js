@@ -136,7 +136,9 @@ function addtorrent(url, name) {
     if (!error && response.statusCode == 200) {
       //item_count2++;
       var $ = cheerio.load(html);
-      var urltorrent = $("#content-torrent > a").attr("href");
+      //var urltorrent = $("#content-torrent > a").attr("href");
+      var textofiltrar = $("#tab1").text();
+      var urltorrent = textofiltrar.match(/http:\/\/.*?\.html/);
 
       exec('transmission-remote -a ' + urltorrent, function (error, stdout, stderr) {
 
