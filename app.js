@@ -137,11 +137,10 @@ function addtorrent(url, name) {
       //item_count2++;
       var $ = cheerio.load(html);
       //var urltorrent = $("#content-torrent > a").attr("href");
-      var textofiltrar = $("#tab1").html();
+      var textofiltrar = $("#tab1 script").html();
       var urltorrent = textofiltrar.match(/http:\/\/.*?\.html/);
 
       exec('transmission-remote -a ' + urltorrent, function (error, stdout, stderr) {
-
           if(stdout) {
             telegram("Descargando: "+name);
           }
