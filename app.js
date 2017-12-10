@@ -64,15 +64,16 @@ http.get('http://www.newpct.com/feed', function(res) {
 
 
       parser.on('item', function(item) {
+        //console.log("LOG:" + lastitem + " - " + item.pubDate.title);
         // El primer item lo guardamos en variable
         if(item_count === 0) {
-          last_item_feed = item.title;
+          last_item_feed = item.link;
           }
         //Sumamos item
         item_count++;
 
         //Comprobamos si el Guardado en el archivo es igual que el actual
-        if(lastitem === item.title) {
+        if(lastitem === item.link) {
           next_item = false;
           //Dejamos de leer el feed para ir al Archivo END
           parser.emit("close");
@@ -81,7 +82,7 @@ http.get('http://www.newpct.com/feed', function(res) {
           // Comprobamos que no se ha cerrado el parseado ya que aveces devuelve algun valor más.
             if(next_item){
               //buscamos si esta entre los nuestros.
-              var searchtrue = SearchInList(item.title);
+              var searchtrue = SearchInList(item.link);
               if(searchtrue) {
                 //enviamos a torrent
                 telegram("Encontrado: " + item.title);
