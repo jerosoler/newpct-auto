@@ -82,7 +82,7 @@ http.get('http://www.newpct.com/feed', function(res) {
           // Comprobamos que no se ha cerrado el parseado ya que aveces devuelve algun valor más.
             if(next_item){
               //buscamos si esta entre los nuestros.
-              var searchtrue = SearchInList(item.link);
+              var searchtrue = SearchInList(item.title);
               if(searchtrue) {
                 //enviamos a torrent
                 telegram("Encontrado: " + item.title);
