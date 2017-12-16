@@ -64,23 +64,26 @@ http.get('http://www.newpct.com/feed', function(res) {
 
 
       parser.on('item', function(item) {
-        //console.log("LOG:" + lastitem + " - " + item.pubDate.title);
+        next_item_item = true;
         // El primer item lo guardamos en variable
         if(item_count === 0) {
-          last_item_feed = item.link;
+          last_item_feed = item.pubdate;
           }
         //Sumamos item
         item_count++;
 
         //Comprobamos si el Guardado en el archivo es igual que el actual
-        if(lastitem === item.link) {
+        if(new Date(lastitem).getTime() >= new Date(item.pubdate).getTime()) {
+
           next_item = false;
+          next_item_item = false;
           //Dejamos de leer el feed para ir al Archivo END
           parser.emit("close");
 
         } else {
           // Comprobamos que no se ha cerrado el parseado ya que aveces devuelve algun valor más.
-            if(next_item){
+            if(next_item && next_item_item){
+              console.log("LOG:" + lastitem + " - " + item.pubdate + "-" + new Date().getHours() + ":"+ new Date().getMinutes());
               //buscamos si esta entre los nuestros.
               var searchtrue = SearchInList(item.title);
               if(searchtrue) {
@@ -140,9 +143,13 @@ function addtorrent(url, name) {
       //var urltorrent = $("#content-torrent > a").attr("href");
       var textofiltrar = $("#tab1 script").html();
       var urltorrent = textofiltrar.match(/http:\/\/.*?\.html/);
-
+      console.log(urltorrent);
       exec('transmission-remote -a ' + urltorrent, function (error, stdout, stderr) {
-          if(stdout) {
+          if(error) {
+           telegram("ERROR: "+name + " Type Error1:" + error);
+         } else if(stderr) {
+            telegram("ERROR: "+name + " Type Error2:" + stderr);
+         } else if(stdout) {
             telegram("Descargando: "+name);
           }
       });
