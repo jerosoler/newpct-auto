@@ -1,3 +1,6 @@
+# Discontinued
+Nuevo proyecto https://github.com/jerosoler/newpct-total 
+
 # Newpct auto
 Automatiza descargas de newpct a transmission. Notificaciones por telegram.
 
